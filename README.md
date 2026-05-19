@@ -1,4 +1,5 @@
 # SAE-2.03
+
 ## Sommaire
 * [1. Architecture et Modélisation Relationnelle](#1-architecture-et-modélisation-relationnelle)
 * [2. Organisation du Projet et Répartition des Rôles](#2-organisation-du-projet-et-répartition-des-rôles)
@@ -11,8 +12,7 @@
 
 Cette section présente la conception de notre base de données relationnelle MySQL, indispensable pour assurer l'intégrité des informations de trafic aérien et optimiser les requêtes de l'application web.
 
-![Schéma Relationnel - Gestion de Trafic Aérien]
-(<img width="2666" height="1434" alt="image" src="https://github.com/user-attachments/assets/9f939b20-8e59-4508-b63b-5f9bfead2cd7" />)
+![Schéma Relationnel - Gestion de Trafic Aérien](https://github.com/user-attachments/assets/9f939b20-8e59-4508-b63b-5f9bfead2cd7)
 *Figure 1 : Diagramme relationnel des entités du trafic aérien (généré via dbdiagram.io).*
 
 ### Analyse technique et choix de modélisation
@@ -22,3 +22,56 @@ La structure réseau et applicative repose sur une décomposition stricte en tab
 * **Planification des flux (`vol`)** : Table centrale du système. Un vol associe un avion et un pilote à un aéroport de départ et un aéroport d'arrivée à des coordonnées temporelles précises (`date_heure_depart`, `date_heure_arrivee`). En raison de la double relation vers la table `aeroport`, l'ORM Django nécessite des configurations spécifiques de clés inversées pour éviter les collisions de requêtes.
 
 ### Code source de conception (Syntaxe DBML)
+```dbml
+Table aeroport {
+  id int [pk, increment]
+  nom varchar
+  pays varchar
+}
+
+Table piste {
+  id int [pk, increment]
+  numero varchar
+  aeroport_id int
+  longueur int
+}
+
+Table compagnie {
+  id int [pk, increment]
+  nom varchar
+  description text
+  pays_rattachement varchar
+}
+
+Table type_avion {
+  id int [pk, increment]
+  marque varchar
+  modele varchar
+  description text
+  image varchar
+  longueur_piste_necessaire int
+}
+
+Table avion {
+  id int [pk, increment]
+  nom varchar
+  compagnie_id int
+  type_avion_id int
+}
+
+Table vol {
+  id int [pk, increment]
+  avion_id int
+  pilote varchar
+  aeroport_depart_id int
+  date_heure_depart datetime
+  aeroport_arrivee_id int
+  date_heure_arrivee datetime
+}
+
+Ref: piste.aeroport_id > aeroport.id
+Ref: avion.compagnie_id > compagnie.id
+Ref: avion.type_avion_id > type_avion.id
+Ref: vol.avion_id > avion.id
+Ref: vol.aeroport_depart_id > aeroport.id
+Ref: vol.aeroport_arrivee_id > aeroport.id
