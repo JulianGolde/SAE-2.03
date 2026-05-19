@@ -1,0 +1,28 @@
+{% extends 'gestion_trafic/base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="form-card" style="border-top: 4px solid var(--danger);">
+            <div class="form-header" style="background-color: #fff; color: var(--danger); text-align: center;">
+                <h3 class="mb-0">️ Confirmation de suppression</h3>
+            </div>
+
+            <div class="form-body" style="text-align: center;">
+                <p style="font-size: 1.1rem; margin-bottom: 2rem;">
+                    Êtes-vous sûr de vouloir supprimer définitivement ce modèle :<br><br>
+                    <strong style="font-size: 1.3rem;">"{{ object }}"</strong> ?
+                </p>
+
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-actions" style="justify-content: center;">
+                        <button type="submit" class="btn btn-danger">Oui, supprimer</button>
+                        <a href="{% url 'liste_compagnies' %}" class="btn btn-secondary">Non, annuler</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

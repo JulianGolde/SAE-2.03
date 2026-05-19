@@ -4,7 +4,7 @@
 <div class="form-card">
     <h3 class="form-header">{% if object %}Modifier{% else %}Ajouter{% endif %} un Modèle Technique</h3>
     <div class="form-body">
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
             <div class="form-actions">

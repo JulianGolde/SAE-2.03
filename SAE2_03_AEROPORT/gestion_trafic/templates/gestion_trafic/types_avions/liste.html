@@ -10,7 +10,7 @@
     <table class="data-table">
         <thead>
             <tr>
-                <th>ID</th>
+                <th>Aperçu</th> <th>ID</th>
                 <th>Constructeur</th>
                 <th>Modèle</th>
                 <th>Distance d'Atterrissage Requise</th>
@@ -20,6 +20,13 @@
         <tbody>
             {% for type in types_avions %}
             <tr>
+                <td>
+                    {% if type.image %}
+                        <img src="{{ type.image.url }}" alt="Photo {{ type.modele }}" class="table-img">
+                    {% else %}
+                        <span class="no-img">📷 N/A</span>
+                    {% endif %}
+                </td>
                 <td>{{ type.id }}</td>
                 <td>{{ type.marque }}</td>
                 <td><strong>{{ type.modele }}</strong></td>
@@ -31,7 +38,7 @@
             </tr>
             {% empty %}
             <tr>
-                <td colspan="5" class="text-center">Aucun modèle technique enregistré.</td>
+                <td colspan="6" style="text-align: center;">Aucun modèle technique enregistré.</td>
             </tr>
             {% endfor %}
         </tbody>

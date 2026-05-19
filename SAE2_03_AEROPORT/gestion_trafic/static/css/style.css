@@ -192,3 +192,22 @@ body {
     color: #9b2c2c;
     border-left: 4px solid var(--danger);
 }
+/* --- VIGNETTES IMAGES DANS LES TABLEAUX --- */
+.table-img {
+    height: 45px;
+    width: 70px;
+    object-fit: cover; /* Recadre proprement l'image sans la déformer */
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    display: block;
+}
+
+.no-img {
+    font-size: 0.85rem;
+    color: #a0aec0;
+    font-weight: 500;
+    background-color: #edf2f7;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    display: inline-block;
+}
