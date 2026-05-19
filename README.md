@@ -109,7 +109,7 @@ Pôle C : Administration Système, Déploiement & Gestion de Projet (Responsable
 
   -  Pilotage de Projet : Suivi et mise à jour des outils de planification collaborative (tableau Trello et diagramme de Gantt).
 
-3. Environnement Technique et Outils Métiers
+## 3. Environnement Technique et Outils Métiers
 
 L'implémentation repose exclusivement sur des outils et frameworks open-source stables :
 
@@ -121,14 +121,14 @@ L'implémentation repose exclusivement sur des outils et frameworks open-source 
 
  -   Planification et Versioning : Gantt Project, Trello, et Git/GitHub
 
-4. Livrables et Critères d'Évaluation
+## 4. Livrables et Critères d'Évaluation
 
-    Dépôt GitHub Mutualisé : Code source applicatif complet, scripts d'initialisation, diagramme Gantt et supports de présentation.
+ -   Dépôt GitHub Mutualisé : Code source applicatif complet, scripts d'initialisation, diagramme Gantt et supports de présentation.
 
-    Machine Virtuelle Opérationnelle : Image système configurée et sécurisée prête pour la mise en production.
+ -   Machine Virtuelle Opérationnelle : Image système configurée et sécurisée prête pour la mise en production.
 
-    Dossier d'Architecture et Déploiement (2 à 5 pages) : Guide d'installation pas-à-pas, topologie réseau (NAT) et répartition détaillée des contributions individuelles.
+ -   Dossier d'Architecture et Déploiement (2 à 5 pages) : Guide d'installation pas-à-pas, topologie réseau (NAT) et répartition détaillée des contributions individuelles.
 
-    Fiche Portfolio Individuelle : Bilan rédigé en anglais justifiant l'acquisition des compétences spécifiques selon le pôle attribué.
+  -  Fiche Portfolio Individuelle : Bilan rédigé en anglais justifiant l'acquisition des compétences spécifiques selon le pôle attribué.
 
-    Soutenance Collective : Démo fonctionnelle de 5 minutes suivie de 10 minutes d'échange et de questions.
+ -   Soutenance Collective : Démo fonctionnelle de 5 minutes suivie de 10 minutes d'échange et de questions.
