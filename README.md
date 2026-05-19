@@ -76,7 +76,7 @@ Ref: vol.avion_id > avion.id
 Ref: vol.aeroport_depart_id > aeroport.id
 Ref: vol.aeroport_arrivee_id > aeroport.id
 ```
-2. Organisation du Projet et Répartition des Rôles
+## 2. Organisation du Projet et Répartition des Rôles
 
 Le développement technique et l'administration des infrastructures de cette SAÉ sont répartis en trois pôles de compétences distincts. Le pôle d'ingénierie cœur centralise la logique métier et les mécanismes de sécurité algorithmiques requis.
 Pôle A : Ingénierie Cœur Backend, Algorithmique Avancée & Cybersécurité (Responsable : Julian)
