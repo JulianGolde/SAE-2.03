@@ -1,0 +1,194 @@
+/* --- VARIABLES ET THÈME GLOBAUX (Thème Aéronautique) --- */
+:root {
+    --primary-color: #1a365d;   /* Bleu nuit tour de contrôle */
+    --secondary-color: #2b6cb0; /* Bleu ciel aéronautique */
+    --bg-light: #f7fafc;        /* Gris très clair pour le fond */
+    --text-dark: #2d3748;       /* Gris foncé pour le texte textuel */
+    --white: #ffffff;
+    --success: #38a169;         /* Vert pour les ajouts/validations */
+    --warning: #dd6b20;         /* Orange pour les modifications */
+    --danger: #e53e3e;          /* Rouge pour les suppressions */
+    --border-color: #e2e8f0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* --- BARRE DE NAVIGATION --- */
+.navbar {
+    background-color: var(--primary-color);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-brand {
+    color: var(--white);
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.navbar-nav {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    gap: 1.5rem;
+}
+
+.nav-link {
+    color: #e2e8f0;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: var(--white);
+}
+
+/* --- CONTENEUR PRINCIPAL --- */
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* --- EN-TÊTES ET BOUTONS --- */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.2s;
+}
+
+.btn-success { background-color: var(--success); color: var(--white); }
+.btn-success:hover { background-color: #2f855a; }
+.btn-primary { background-color: var(--secondary-color); color: var(--white); }
+.btn-primary:hover { background-color: #2b6cb0; }
+.btn-secondary { background-color: #718096; color: var(--white); }
+.btn-secondary:hover { background-color: #4a5568; }
+.btn-warning { background-color: var(--warning); color: var(--white); padding: 0.4rem 0.8rem; font-size: 0.9rem; }
+.btn-warning:hover { background-color: #c05621; }
+.btn-danger { background-color: var(--danger); color: var(--white); padding: 0.4rem 0.8rem; font-size: 0.9rem; }
+.btn-danger:hover { background-color: #9b2c2c; }
+
+/* --- TABLEAUX DE DONNÉES --- */
+.data-card {
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    padding: 1.5rem;
+    overflow-x: auto;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.data-table th {
+    background-color: #f7fafc;
+    color: #4a5568;
+    padding: 1rem;
+    font-weight: 600;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.data-table td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
+}
+
+.data-table tr:hover {
+    background-color: #f8fafc;
+}
+
+/* --- FORMULAIRES DE CONFIGURATION --- */
+.form-card {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    overflow: hidden;
+}
+
+.form-header {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 1rem 1.5rem;
+    margin: 0;
+}
+
+.form-body {
+    padding: 2rem;
+}
+
+/* Stylisation automatique des champs générés par form.as_p */
+.form-body p {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.2rem;
+}
+
+.form-body label {
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    color: #4a5568;
+}
+
+.form-body input, .form-body select, .form-body textarea {
+    padding: 0.6rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: #fff;
+}
+
+.form-body input:focus, .form-body select:focus, .form-body textarea:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
+}
+
+.form-actions {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+}
+
+/* --- ALERTES --- */
+.alert {
+    padding: 1rem;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+.alert-danger {
+    background-color: #fed7d7;
+    color: #9b2c2c;
+    border-left: 4px solid var(--danger);
+}
