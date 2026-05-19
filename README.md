@@ -11,8 +11,8 @@
 
 Cette section présente la conception de notre base de données relationnelle MySQL, indispensable pour assurer l'intégrité des informations de trafic aérien et optimiser les requêtes de l'application web.
 
-![Schéma Relationnel - Gestion de Trafic Aérien](<img width="2666" height="1434" alt="image" src="https://github.com/user-attachments/assets/9f939b20-8e59-4508-b63b-5f9bfead2cd7" />
-)
+![Schéma Relationnel - Gestion de Trafic Aérien]
+(<img width="2666" height="1434" alt="image" src="https://github.com/user-attachments/assets/9f939b20-8e59-4508-b63b-5f9bfead2cd7" />)
 *Figure 1 : Diagramme relationnel des entités du trafic aérien (généré via dbdiagram.io).*
 
 ### Analyse technique et choix de modélisation
