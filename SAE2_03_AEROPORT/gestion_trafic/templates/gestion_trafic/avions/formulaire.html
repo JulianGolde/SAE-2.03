@@ -1,0 +1,23 @@
+{% extends 'gestion_trafic/base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">{% if object %}Modifier{% else %}Ajouter{% endif %} un Avion</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="mt-4">
+                        <button type="submit" class="btn btn-primary">Enregistrer l'appareil</button>
+                        <a href="{% url 'liste_avions' %}" class="btn btn-secondary">Annuler</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
