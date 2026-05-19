@@ -27,7 +27,8 @@ class TypeAvion(models.Model):
     marque = models.CharField(max_length=100, verbose_name="Constructeur")
     modele = models.CharField(max_length=100, verbose_name="Modèle exact")
     description = models.TextField(blank=True, null=True)
-    image = models.URLField(max_length=500, blank=True, null=True)
+    # --- LA LIGNE À CHANGER EST CELLE-CI ---
+    image = models.ImageField(upload_to='images_avions/', blank=True, null=True, verbose_name="Photo de l'appareil")
     longueur_piste_necessaire = models.IntegerField(help_text="Distance d'atterrissage minimale en mètres")
 
     def __str__(self):
