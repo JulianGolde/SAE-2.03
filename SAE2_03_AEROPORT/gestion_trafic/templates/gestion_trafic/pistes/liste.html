@@ -1,42 +1,40 @@
 {% extends 'gestion_trafic/base.html' %}
 
 {% block content %}
-<div class="d-flex justify-content-between align-items-center mb-3">
+<div class="page-header">
     <h2>Liste des Pistes d'Atterrissage</h2>
     <a href="{% url 'ajouter_piste' %}" class="btn btn-success">+ Ajouter une Piste</a>
 </div>
 
-<div class="card shadow-sm">
-    <div class="card-body">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Numéro (ex: 12L)</th>
-                    <th>Aéroport</th>
-                    <th>Longueur</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for piste in pistes %}
-                <tr>
-                    <td>{{ piste.id }}</td>
-                    <td><strong>{{ piste.numero }}</strong></td>
-                    <td>{{ piste.aeroport.nom }}</td>
-                    <td>{{ piste.longueur }} mètres</td>
-                    <td>
-                        <a href="{% url 'modifier_piste' piste.id %}" class="btn btn-sm btn-warning">Modifier</a>
-                        <a href="{% url 'supprimer_piste' piste.id %}" class="btn btn-sm btn-danger">Supprimer</a>
-                    </td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="5" class="text-center text-muted">Aucune piste enregistrée pour le moment.</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+<div class="data-card">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Numéro (ex: 12L)</th>
+                <th>Aéroport</th>
+                <th>Longueur</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for piste in pistes %}
+            <tr>
+                <td>{{ piste.id }}</td>
+                <td><strong>{{ piste.numero }}</strong></td>
+                <td>{{ piste.aeroport.nom }}</td>
+                <td>{{ piste.longueur }} mètres</td>
+                <td>
+                    <a href="{% url 'modifier_piste' piste.id %}" class="btn btn-warning">Modifier</a>
+                    <a href="{% url 'supprimer_piste' piste.id %}" class="btn btn-danger">Supprimer</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" style="text-align: center;">Aucune piste enregistrée.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endblock %}

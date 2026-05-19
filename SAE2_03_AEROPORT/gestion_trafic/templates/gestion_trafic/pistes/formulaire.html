@@ -1,23 +1,17 @@
 {% extends 'gestion_trafic/base.html' %}
 
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-md-8">
-        <div class="card shadow-sm">
-            <div class="card-header bg-primary text-white">
-                <h4 class="mb-0">{% if object %}Modifier{% else %}Ajouter{% endif %} une Piste</h4>
+<div class="form-card">
+    <h3 class="form-header">{% if object %}Modifier{% else %}Ajouter{% endif %} une Piste</h3>
+    <div class="form-body">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Enregistrer la piste</button>
+                <a href="{% url 'liste_pistes' %}" class="btn btn-secondary">Annuler</a>
             </div>
-            <div class="card-body">
-                <form method="POST">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <div class="mt-4">
-                        <button type="submit" class="btn btn-primary">Enregistrer la piste</button>
-                        <a href="{% url 'liste_pistes' %}" class="btn btn-secondary">Annuler</a>
-                    </div>
-                </form>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
 {% endblock %}

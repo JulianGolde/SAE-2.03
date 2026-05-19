@@ -1,0 +1,40 @@
+{% extends 'gestion_trafic/base.html' %}
+
+{% block content %}
+<div class="page-header">
+    <h2>Compagnies Aériennes Partenaires</h2>
+    <a href="{% url 'ajouter_compagnie' %}" class="btn btn-success">+ Enregistrer une Compagnie</a>
+</div>
+
+<div class="data-card">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom de la Compagnie</th>
+                <th>Pays de Rattachement</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for compagnie in compagnies %}
+            <tr>
+                <td>{{ compagnie.id }}</td>
+                <td><strong>{{ compagnie.nom }}</strong></td>
+                <td>{{ compagnie.pays_rattachement }}</td>
+                <td>{{ compagnie.description|default:"Aucune description" }}</td>
+                <td>
+                    <a href="{% url 'modifier_compagnie' compagnie.id %}" class="btn btn-warning">Modifier</a>
+                    <a href="{% url 'supprimer_compagnie' compagnie.id %}" class="btn btn-danger">Supprimer</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="text-center">Aucune compagnie enregistrée.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

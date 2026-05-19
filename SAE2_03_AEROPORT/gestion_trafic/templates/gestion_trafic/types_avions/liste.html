@@ -1,0 +1,40 @@
+{% extends 'gestion_trafic/base.html' %}
+
+{% block content %}
+<div class="page-header">
+    <h2>Référentiel Technique des Modèles d'Avions</h2>
+    <a href="{% url 'ajouter_type_avion' %}" class="btn btn-success">+ Ajouter un Modèle</a>
+</div>
+
+<div class="data-card">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Constructeur</th>
+                <th>Modèle</th>
+                <th>Distance d'Atterrissage Requise</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for type in types_avions %}
+            <tr>
+                <td>{{ type.id }}</td>
+                <td>{{ type.marque }}</td>
+                <td><strong>{{ type.modele }}</strong></td>
+                <td>{{ type.longueur_piste_necessaire }} mètres</td>
+                <td>
+                    <a href="{% url 'modifier_type_avion' type.id %}" class="btn btn-warning">Modifier</a>
+                    <a href="{% url 'supprimer_type_avion' type.id %}" class="btn btn-danger">Supprimer</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="text-center">Aucun modèle technique enregistré.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

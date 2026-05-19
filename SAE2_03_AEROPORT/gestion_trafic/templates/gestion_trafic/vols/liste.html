@@ -1,44 +1,42 @@
 {% extends 'gestion_trafic/base.html' %}
 
 {% block content %}
-<div class="d-flex justify-content-between align-items-center mb-3">
+<div class="page-header">
     <h2>Liste des Vols Programmés</h2>
-    <a href="{% url 'ajouter_vol' %}" class="btn btn-success">+ Ajouter un Vol</a>
+    <a href="{% url 'ajouter_vol' %}" class="btn btn-success">+ Programmer un Vol</a>
 </div>
 
-<div class="card shadow-sm">
-    <div class="card-body">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Départ</th>
-                    <th>Arrivée</th>
-                    <th>Avion</th>
-                    <th>Pilote</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for vol in vols %}
-                <tr>
-                    <td>{{ vol.id }}</td>
-                    <td>{{ vol.aeroport_depart.nom }} ({{ vol.date_heure_depart|date:"d/m H:i" }})</td>
-                    <td>{{ vol.aeroport_arrivee.nom }} ({{ vol.date_heure_arrivee|date:"d/m H:i" }})</td>
-                    <td>{{ vol.avion.nom }}</td>
-                    <td>{{ vol.pilote }}</td>
-                    <td>
-                        <a href="{% url 'modifier_vol' vol.id %}" class="btn btn-sm btn-warning">Modifier</a>
-                        <a href="{% url 'supprimer_vol' vol.id %}" class="btn btn-sm btn-danger">Supprimer</a>
-                    </td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="6" class="text-center text-muted">Aucun vol programmé pour le moment.</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+<div class="data-card">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Départ</th>
+                <th>Arrivée</th>
+                <th>Avion</th>
+                <th>Pilote</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for vol in vols %}
+            <tr>
+                <td>{{ vol.id }}</td>
+                <td><strong>{{ vol.aeroport_depart.nom }}</strong><br><small>{{ vol.date_heure_depart|date:"d/m/Y H:i" }}</small></td>
+                <td><strong>{{ vol.aeroport_arrivee.nom }}</strong><br><small>{{ vol.date_heure_arrivee|date:"d/m/Y H:i" }}</small></td>
+                <td>{{ vol.avion.nom }}</td>
+                <td>{{ vol.pilote }}</td>
+                <td>
+                    <a href="{% url 'modifier_vol' vol.id %}" class="btn btn-warning">Modifier</a>
+                    <a href="{% url 'supprimer_vol' vol.id %}" class="btn btn-danger">Supprimer</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" style="text-align: center;">Aucun vol programmé.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endblock %}
