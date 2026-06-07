@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="SAE2.03 - Gestion du trafic aerien" company="IUT - RT3 informatique" webLink="" view-date="2026-05-18" view-index="0" gantt-divider-location="617" resource-divider-location="322" version="3.3.3316" locale="fr_FR">
+    <description><![CDATA[Planning du projet SAE avec date butoir au 10/06/2026. Repartition: Golde Julian = CRUD/developpement, Yildiz Ali = virtualisation/deploiement, Kara Lydia = backend/web.]]></description>
+    <view zooming-state="default:5" id="gantt-chart">
+        <field id="tpd3" name="Nom" width="269" order="0"/>
+        <field id="tpd4" name="Date de début" width="77" order="1"/>
+        <field id="tpd5" name="Date de fin" width="77" order="2"/>
+        <field id="tpd7" name="Avancée" width="65" order="3"/>
+        <field id="tpd8" name="Responsable" width="113" order="4"/>
+        <option id="filter.completedTasks" value="false"/>
+        <option id="filter.dueTodayTasks" value="false"/>
+        <option id="filter.overdueTasks" value="false"/>
+        <option id="filter.inProgressTodayTasks" value="false"/>
+        <timeline><![CDATA[5]]></timeline>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Nom" width="186" order="0"/>
+        <field id="1" name="Rôle par défaut" width="132" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+            <only-show-weekends value="false"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+            <taskproperty id="tpc0" name="Is done" type="custom" valuetype="boolean" defaultvalue="false">
+                <simple-select select="completion=100"/>
+            </taskproperty>
+        </taskproperties>
+        <task id="5" uid="527fb1bfb18bc7e5366bc439273a4e22" name="1. Cadrage, Trello et organisation" color="#99ccff" meeting="false" start="2026-05-21" duration="2" complete="63" expand="true" cost-manual-value="0" cost-calculated="false">
+            <customproperty taskproperty-id="tpc0" value="false"/>
+            <task id="1" uid="b1f67e76525c0d572ab64a952956dc2e" name="Analyser le sujet et transformer le besoin en backlog" color="#6bb7d6" meeting="false" start="2026-05-21" duration="1" complete="80" expand="true" cost-manual-value="0" cost-calculated="false">
+                <notes><![CDATA[Lister les CRUD, les contraintes de piste, l import de vols, les fiches et les livrables.]]></notes>
+                <depend id="3" type="2" difference="0" hardness="Strong"/>
+                <customproperty taskproperty-id="tpc0" value="false"/>
+            </task>
+            <task id="2" uid="6ace011c5c45e33c75cf36ac7e8e92d2" name="Creer Trello, depot GitHub et conventions de travail" color="#6bb7d6" meeting="false" start="2026-05-21" duration="1" complete="60" expand="true" cost-manual-value="0" cost-calculated="false">
+                <depend id="4" type="2" difference="0" hardness="Strong"/>
+                <customproperty taskproperty-id="tpc0" value="false"/>
+            </task>
+            <task id="3" uid="dba33ead45f3ab8ef936e8f1f6d03309" name="Repartir les taches selon les roles du groupe" color="#6bb7d6" meeting="false" start="2026-05-22" duration="1" complete="50" expand="true" cost-manual-value="0" cost-calculated="false">
+                <depend id="4" type="2" difference="0" hardness="Strong"/>
+                <customproperty taskproperty-id="tpc0" value="false"/>
+            </task>
+            <task id="4" uid="9364579b2b19eb4f7de01702e9c5b91a" name="Jalon: cadrage valide" color="#222222" meeting="true" start="2026-05-25" duration="0" complete="40" expand="true" cost-manual-value="0" cost-calculated="false">
+                <depend id="6" type="2" difference="0" hardness="Strong"/>
+                <customproperty taskproperty-id="tpc0" value="false"/>
+            </task>
+        </task>
+        <task id="10" uid="6bc2173b873767b5dc31a1a737ad5a4b" name="2. Conception backend et base de donnees" color="#99ccff" meeting="false" start="2026-05-25" duration="3" complete="13" expand="true" cost-manual-value="0" cost-calculated="false">
+            <customproperty taskproperty-id="tpc0" value="false"/>
+            <task id="6" uid="0c160253e0e7ec12a9887dfabac6a2e4" name="Modeliser le schema: aeroports, pistes, compagnies, types, avions, vols" color="#4caf7d" meeting="false" start="2026-05-25" duration="1" complete="30" expand="true" cost-manual-value="0" cost-calculated="false">
+                <depend id="7" type="2" difference="0" hardness="Strong"/>
+                <customproperty taskproperty-id="tpc0" value="false"/>
+            </task>
+            <task id="7" uid="f90aaaa7cb4e21813718d745d747d912" name="Definir relations, contraintes et donnees initiales MySQL" color="#4caf7d" meeting="false" start="2026-05-26" duration="1" complete="10" expand="true" cost-manual-value="0" cost-calculated="false">
+                <depend id="8" type="2" difference="0" hardness="Strong"/>
+                <customproperty taskproperty-id="tpc0" value="false"/>
+            </task>
+            <task id="8" uid="efa35e11efb08d123331f740cc21997c" name="Preparer migrations Django et jeu de donnees de demonstration" color="#4caf7d" meeting="false" start="2026-05-27" duration="1" complete="0" expand="true" cost-manual-value="0" cost-calculated="false">
+                <depend id="9" type="2" difference="0" hardness="Strong"/>
+                <customproperty taskproperty-id="tpc0" value="false"/>
+            </task>
+            <task id="9" uid="3371a58214a8a6d4b903027f774c7088" name="Jalon: schema BDD pret" color="#222222" meeting="true" start="2026-05-28" duration="0" complete="0" expand="true" cost-manual-value="0" cost-calculated="false">
+                <depend id="17" type="2" difference="0" hardness="Strong"/>
+                <customproperty taskproperty-id="tpc0" value="false"/>
+            </task>
+        </task>
+        <task id="16" uid="f6ccc15ad3293ab1f17745e4df337fc1" name="3. VM Linux et environnement technique" color="#99ccff" meeting="false" start="2026-05-22" duration="4" complete="8" expand="true" cost-manual-value="0" cost-calculated="false">
+            <customproperty taskproperty-id="tpc0" value="false"/>
+            <task id="11" uid="048686e3c5f92f76335e09591b780bec" name="Creer la VM Linux sous VirtualBox" color="#f0b44c" meeting="false" start="2026-05-22" duration="1" complete="25" expand="true" cost-manual-value="0" cost-calculated="false">
+                <depend id="12" type="2" difference="0" hardness="Strong"/>
+                <customproperty taskproperty-id="tpc0" value="false"/>
+            </task>
+            <task id="12" uid="f3c6d38d24a9ab8853a71202bf7aa79f" name="Installer Python, PIP, Django, Git et MySQL" color="#f0b44c" meeting="false" start="2026-05-25" duration="1" complete="0" expand="true" cost-manual-value="0" cost-calculated="false">
+                <depend id="13" type="2" difference="0" hardness="Strong"/>
+                <customproperty taskproperty-id="tpc0" value="false"/>
+            </task>
+            <task id="13" uid="866a5d635fac0105bde85113c04d167c" name="Configurer MySQL, utilisateur unique, ports et pare-feu" color="#f0b44c" meeting="false" start="2026-05-26" duration="1" complete="0" expand="true" cost-manual-value="0" cost-calculated="false">
+                <depend id="15" type="2" difference="0" hardness="Strong"/>
+                <customproperty taskproperty-id="tpc0" value="false"/>
+            </task>
+            <task id="14" uid="e4e3de83bbf841bd95e817f1d8875b48" name="Preparer notes d installation pour la procedure finale" color="#f0b44c" meeting="false" start="2026-05-27" duration="1" complete="10" expand="true" cost-manual-value="0" cost-calculated="false">
+                <customproperty taskproperty-id="tpc0" value="false"/>
+            </task>
+            <task id="15" uid="a33e7202c6cba017405663e612ad3608" name="Jalon: VM prete" color="#222222" meeting="true" start="2026-05-27" duration="0" complete="0" expand="true" cost-manual-value="0" cost-calculated="false">
+                <depend id="17" type="2" difference="0" hardness="Strong"/>
+                <customproperty taskproperty-id="tpc0" value="false"/>
+            </task>
+        </task>
+        <task id="24" uid="e43d08df81b6b817a03bd1f0b7e7169a" name="4. Developpement Django, CRUD et interface" color="#99ccff" meeting="false" start="2026-05-28" duration="8" complete="0" expand="true" cost-manual-value="0" cost-calculated="false">
+            <customproperty taskproperty-id="tpc0" value="false"/>
+            <task id="17" uid="f769e198686f27ea080432c7036cfcf9" name="Initialiser projet Django et connexion MySQL" color="#6f8ed6" meeting="false" start="2026-05-28" duration="1" complete="0" expand="true" cost-manual-value="0" cost-calculated="false">
+                <depend id="18" type="2" difference="0" hardness="Strong"/>
+                <customproperty taskproperty-id="tpc0" value="false"/>
+            </task>
+            <task id="18" uid="ad28ea6970e513ef55a3ffec432c5de5" name="Coder modeles, migrations et administration" color="#6f8ed6" meeting="false" start="2026-05-29" duration="1" complete="0" expand="true" cost-manual-value="0" cost-calculated="false">
+                <depend id="19" type="2" difference="0" hardness="Strong"/>
+                <customproperty taskproperty-id="tpc0" value="false"/>
+            </task>
+            <task id="19" uid="871d3161e6188b36427d648ff65f1138" name="CRUD aeroports, pistes et compagnies" color="#6f8ed6" meeting="false" start="2026-06-01" duration="2" complete="0" expand="true" cost-manual-value="0" cost-calculated="false">
+                <depend id="20" type="2" difference="0" hardness="Strong"/>
+                <customproperty taskproperty-id="tpc0" value="false"/>
+            </task>
+            <task id="20" uid="d5f9b4d555e6a11fb81fa63e485b7140" name="CRUD types d avions, avions et vols" color="#6f8ed6" meeting="false" start="2026-06-03" duration="2" complete="0" expand="true" cost-manual-value="0" cost-calculated="false">
+                <depend id="21" type="2" difference="0" hardness="Strong"/>
+                <depend id="25" type="2" difference="0" hardness="Strong"/>
+                <customproperty taskproperty-id="tpc0" value="false"/>
+            </task>
+            <task id="21" uid="0bd235a75fc46987007957e78908b36e" name="Formulaires creation, modification, inspection et suppression" color="#6f8ed6" meeting="false" start="2026-06-05" duration="2" complete="0" expand="true" cost-manual-value="0" cost-calculated="false">
+                <depend id="23" type="2" difference="0" hardness="Strong"/>
+                <customproperty taskproperty-id="tpc0" value="false"/>
+            </task>
+            <task id="22" uid="28d51be9af36ac6b2bcc68f4e628f719" name="Interface web claire: navigation, messages et pages de detail" color="#6f8ed6" meeting="false" start="2026-06-03" duration="1" complete="0" expand="true" cost-manual-value="0" cost-calculated="false">
+                <depend id="23" type="2" difference="0" hardness="Strong"/>
+                <customproperty taskproperty-id="tpc0" value="false"/>
+            </task>
+            <task id="23" uid="5fab9394ff78b8c6f1a33be22731b0ca" name="Jalon: CRUD complet" color="#222222" meeting="true" start="2026-06-09" duration="0" complete="0" expand="true" cost-manual-value="0" cost-calculated="false">
+                <depend id="39" type="2" difference="0" hardness="Strong"/>
+                <customproperty taskproperty-id="tpc0" value="false"/>
+            </task>
+        </task>
+        <task id="31" uid="8f04ec05c30b8dc2bf604b4554f239a0" name="5. Regles metier, import et fiches de vols" color="#99ccff" meeting="false" start="2026-06-04" duration="4" complete="0" expand="true" cost-manual-value="0" cost-calculated="false">
+            <customproperty taskproperty-id="tpc0" value="false"/>
+            <task id="25" uid="6b7a37f49cae21136aa2f0cbbc7107df" name="Verifier compatibilite avion/piste selon longueur necessaire" color="#e17572" meeting="false" start="2026-06-05" duration="1" complete="0" expand="true" cost-manual-value="0" cost-calculated="false">
+                <depend id="26" type="2" difference="0" hardness="Strong"/>
+                <customproperty taskproperty-id="tpc0" value="false"/>
+            </task>
+            <task id="26" uid="b513271de3a55ec6f627ebb3df1ea820" name="Gerer disponibilite piste avec blocage de 10 minutes" color="#e17572" meeting="false" start="2026-06-08" duration="1" complete="0" expand="true" cost-manual-value="0" cost-calculated="false">
+                <depend id="27" type="2" difference="0" hardness="Strong"/>
+                <customproperty taskproperty-id="tpc0" value="false"/>
+            </task>
+            <task id="27" uid="402499b29394d0e292519dc1c1b56ae1" name="Proposer un horaire plus tard si aucune piste compatible n est libre" color="#e17572" meeting="false" start="2026-06-09" duration="1" complete="0" expand="true" cost-manual-value="0" cost-calculated="false">
+                <depend id="30" type="2" difference="0" hardness="Strong"/>
+                <customproperty taskproperty-id="tpc0" value="false"/>
+            </task>
+            <task id="28" uid="160dfadc3fbdc8d1bcbebd49b69640f1" name="Importer un ensemble de vols depuis un fichier decrit dans l aide" color="#9b8bd9" meeting="false" start="2026-06-04" duration="2" complete="0" expand="true" cost-manual-value="0" cost-calculated="false">
+                <depend id="29" type="2" difference="0" hardness="Strong"/>
+                <customproperty taskproperty-id="tpc0" value="false"/>
+            </task>
+            <task id="29" uid="a40aaf8da9cd22d6ac2549c44aabebc7" name="Generer fiche des vols depart/destination par date ou periode" color="#9b8bd9" meeting="false" start="2026-06-08" duration="1" complete="0" expand="true" cost-manual-value="0" cost-calculated="false">
+                <depend id="30" type="2" difference="0" hardness="Strong"/>
+                <customproperty taskproperty-id="tpc0" value="false"/>
+            </task>
+            <task id="30" uid="cadc070df6a1ec80f8522f1c4361cf60" name="Jalon: fonctions metier validees" color="#222222" meeting="true" start="2026-06-10" duration="0" complete="0" expand="true" cost-manual-value="0" cost-calculated="false">
+                <depend id="39" type="2" difference="0" hardness="Strong"/>
+                <customproperty taskproperty-id="tpc0" value="false"/>
+            </task>
+        </task>
+        <task id="38" uid="d45c79200cf86ba69240a020d5643f84" name="6. Deploiement, securisation et acces web" color="#99ccff" meeting="false" start="2026-06-03" duration="5" complete="0" expand="true" cost-manual-value="0" cost-calculated="false">
+            <customproperty taskproperty-id="tpc0" value="false"/>
+            <task id="32" uid="2a8fdb36da0ff383559150cb2b12a934" name="Preparer serveur web et lancement de l application" color="#7a9f50" meeting="false" start="2026-06-03" duration="1" complete="0" expand="true" cost-manual-value="0" cost-calculated="false">
+                <depend id="33" type="2" difference="0" hardness="Strong"/>
+                <customproperty taskproperty-id="tpc0" value="false"/>
+            </task>
+            <task id="33" uid="ec2e0e391a9e42206c41187f59d99271" name="Configurer NAT, ports ou regles PF pour acces depuis le web" color="#7a9f50" meeting="false" start="2026-06-04" duration="1" complete="0" expand="true" cost-manual-value="0" cost-calculated="false">
+                <depend id="34" type="2" difference="0" hardness="Strong"/>
+                <customproperty taskproperty-id="tpc0" value="false"/>
+            </task>
+            <task id="34" uid="c69ea3caa90fea8f174c3bb303683e96" name="Stabiliser environnement: secrets, droits, ressources et sauvegarde" color="#7a9f50" meeting="false" start="2026-06-05" duration="1" complete="0" expand="true" cost-manual-value="0" cost-calculated="false">
+                <depend id="35" type="2" difference="0" hardness="Strong"/>
+                <customproperty taskproperty-id="tpc0" value="false"/>
+            </task>
+            <task id="35" uid="05ccf068da1fce41a786b93713236c8a" name="Faire une repetition complete installation + deploiement" color="#7a9f50" meeting="false" start="2026-06-08" duration="1" complete="0" expand="true" cost-manual-value="0" cost-calculated="false">
+                <depend id="36" type="2" difference="0" hardness="Strong"/>
+                <customproperty taskproperty-id="tpc0" value="false"/>
+            </task>
+            <task id="36" uid="e40757dd169ee8bbdd20ccff7373e3e7" name="Corriger les points bloquants du deploiement" color="#7a9f50" meeting="false" start="2026-06-09" duration="1" complete="0" expand="true" cost-manual-value="0" cost-calculated="false">
+                <depend id="37" type="2" difference="0" hardness="Strong"/>
+                <customproperty taskproperty-id="tpc0" value="false"/>
+            </task>
+            <task id="37" uid="f264338626f522c74b34907f3b572953" name="Jalon: site deploye" color="#222222" meeting="true" start="2026-06-10" duration="0" complete="0" expand="true" cost-manual-value="0" cost-calculated="false">
+                <customproperty taskproperty-id="tpc0" value="false"/>
+            </task>
+        </task>
+        <task id="46" uid="52f91e33a5e1344e7dfbb25e26fab1c1" name="7. Tests, documentation et soutenance" color="#99ccff" meeting="false" start="2026-06-05" duration="6" complete="0" expand="true" cost-manual-value="0" cost-calculated="false">
+            <customproperty taskproperty-id="tpc0" value="false"/>
+            <task id="39" uid="04a4fd4c9b25458ceb24ad6357874d4f" name="Tester tous les CRUD et les conflits de piste" color="#d87ca8" meeting="false" start="2026-06-10" duration="2" complete="0" expand="true" cost-manual-value="0" cost-calculated="false">
+                <depend id="44" type="2" difference="0" hardness="Strong"/>
+                <customproperty taskproperty-id="tpc0" value="false"/>
+            </task>
+            <task id="40" uid="649c97f765d76327ebb7162642043678" name="Rediger procedure installation/deploiement 2 a 5 pages" color="#5c8fd6" meeting="false" start="2026-06-05" duration="3" complete="0" expand="true" cost-manual-value="0" cost-calculated="false">
+                <notes><![CDATA[Chaque membre ajoute sa partie: Julian CRUD, Ali VM/deploiement, Lydia backend/web.]]></notes>
+                <depend id="43" type="2" difference="0" hardness="Strong"/>
+                <customproperty taskproperty-id="tpc0" value="false"/>
+            </task>
+            <task id="41" uid="ca99b8afeefe957c12f908226bfcb248" name="Completer portfolio individuel: resume anglais et justification competence" color="#5c8fd6" meeting="false" start="2026-06-08" duration="1" complete="0" expand="true" cost-manual-value="0" cost-calculated="false">
+                <customproperty taskproperty-id="tpc0" value="false"/>
+            </task>
+            <task id="42" uid="b71e35f019fed9ceaf3ead6308147bbd" name="Preparer presentation 5 minutes + demo + questions" color="#5c8fd6" meeting="false" start="2026-06-08" duration="2" complete="0" expand="true" cost-manual-value="0" cost-calculated="false">
+                <depend id="44" type="2" difference="0" hardness="Strong"/>
+                <customproperty taskproperty-id="tpc0" value="false"/>
+            </task>
+            <task id="43" uid="e7c1cf140137c3ab28cbbd1d9366a54f" name="Ajouter schema BDD, Gantt et presentation dans GitHub" color="#5c8fd6" meeting="false" start="2026-06-10" duration="1" complete="0" expand="true" cost-manual-value="0" cost-calculated="false">
+                <depend id="45" type="2" difference="0" hardness="Strong"/>
+                <customproperty taskproperty-id="tpc0" value="false"/>
+            </task>
+            <task id="44" uid="f4761ad63ae47541c2feb9065f02533e" name="Repetition finale et verification des livrables" color="#5c8fd6" meeting="false" start="2026-06-12" duration="1" complete="0" expand="true" cost-manual-value="0" cost-calculated="false">
+                <depend id="45" type="2" difference="0" hardness="Strong"/>
+                <customproperty taskproperty-id="tpc0" value="false"/>
+            </task>
+            <task id="45" uid="094eca7d35292f16f5d18b59edbefeff" name="DATE BUTOIR: rendu final SAE" color="#222222" meeting="true" start="2026-06-15" duration="0" complete="0" expand="true" cost-manual-value="0" cost-calculated="false">
+                <customproperty taskproperty-id="tpc0" value="false"/>
+            </task>
+        </task>
+    </tasks>
+    <resources>
+        <resource id="0" name="Golde Julian - CRUD / developpement" function="1" contacts="" phone=""/>
+        <resource id="1" name="Yildiz Ali - Virtualisation / deploiement" function="2" contacts="" phone=""/>
+        <resource id="2" name="Kara Lydia - Backend / web" function="3" contacts="" phone=""/>
+        <resource id="3" name="Groupe complet" function="0" contacts="" phone=""/>
+    </resources>
+    <allocations>
+        <allocation task-id="19" resource-id="0" function="1" responsible="true" load="100.0"/>
+        <allocation task-id="20" resource-id="0" function="1" responsible="true" load="100.0"/>
+        <allocation task-id="21" resource-id="0" function="1" responsible="true" load="100.0"/>
+        <allocation task-id="28" resource-id="0" function="1" responsible="true" load="100.0"/>
+        <allocation task-id="29" resource-id="0" function="1" responsible="true" load="100.0"/>
+        <allocation task-id="11" resource-id="1" function="2" responsible="true" load="100.0"/>
+        <allocation task-id="12" resource-id="1" function="2" responsible="true" load="100.0"/>
+        <allocation task-id="13" resource-id="1" function="2" responsible="true" load="100.0"/>
+        <allocation task-id="14" resource-id="1" function="2" responsible="true" load="100.0"/>
+        <allocation task-id="32" resource-id="1" function="2" responsible="true" load="100.0"/>
+        <allocation task-id="33" resource-id="1" function="2" responsible="true" load="100.0"/>
+        <allocation task-id="34" resource-id="1" function="2" responsible="true" load="100.0"/>
+        <allocation task-id="35" resource-id="1" function="2" responsible="true" load="100.0"/>
+        <allocation task-id="36" resource-id="1" function="2" responsible="true" load="100.0"/>
+        <allocation task-id="6" resource-id="2" function="3" responsible="true" load="100.0"/>
+        <allocation task-id="7" resource-id="2" function="3" responsible="true" load="100.0"/>
+        <allocation task-id="8" resource-id="2" function="3" responsible="true" load="100.0"/>
+        <allocation task-id="17" resource-id="2" function="3" responsible="true" load="100.0"/>
+        <allocation task-id="18" resource-id="2" function="3" responsible="true" load="100.0"/>
+        <allocation task-id="22" resource-id="2" function="3" responsible="true" load="100.0"/>
+        <allocation task-id="25" resource-id="2" function="3" responsible="true" load="100.0"/>
+        <allocation task-id="26" resource-id="2" function="3" responsible="true" load="100.0"/>
+        <allocation task-id="27" resource-id="2" function="3" responsible="true" load="100.0"/>
+        <allocation task-id="1" resource-id="3" function="0" responsible="true" load="100.0"/>
+        <allocation task-id="2" resource-id="3" function="0" responsible="true" load="100.0"/>
+        <allocation task-id="3" resource-id="3" function="0" responsible="true" load="100.0"/>
+        <allocation task-id="4" resource-id="3" function="0" responsible="true" load="100.0"/>
+        <allocation task-id="9" resource-id="3" function="0" responsible="true" load="100.0"/>
+        <allocation task-id="15" resource-id="3" function="0" responsible="true" load="100.0"/>
+        <allocation task-id="23" resource-id="3" function="0" responsible="true" load="100.0"/>
+        <allocation task-id="30" resource-id="3" function="0" responsible="true" load="100.0"/>
+        <allocation task-id="37" resource-id="3" function="0" responsible="true" load="100.0"/>
+        <allocation task-id="39" resource-id="3" function="0" responsible="true" load="100.0"/>
+        <allocation task-id="40" resource-id="3" function="0" responsible="true" load="100.0"/>
+        <allocation task-id="41" resource-id="3" function="0" responsible="true" load="100.0"/>
+        <allocation task-id="42" resource-id="3" function="0" responsible="true" load="100.0"/>
+        <allocation task-id="43" resource-id="3" function="0" responsible="true" load="100.0"/>
+        <allocation task-id="44" resource-id="3" function="0" responsible="true" load="100.0"/>
+        <allocation task-id="45" resource-id="3" function="0" responsible="true" load="100.0"/>
+    </allocations>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+    <roles>
+        <role id="0" name="Coordination projet"/>
+        <role id="1" name="CRUD et developpement Django"/>
+        <role id="2" name="Virtualisation et deploiement"/>
+        <role id="3" name="Backend, web et base de donnees"/>
+        <role id="4" name="Documentation"/>
+        <role id="5" name="Tests et validation"/>
+    </roles>
+</project>
