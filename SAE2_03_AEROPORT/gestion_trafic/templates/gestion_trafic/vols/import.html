@@ -1,0 +1,40 @@
+{% extends 'gestion_trafic/base.html' %}
+
+{% block content %}
+<div class="form-card">
+    <div class="form-header text-center">
+        <h3 class="mb-0"> Importation massive de vols</h3>
+    </div>
+    
+    <div class="form-body">
+        <div class="alert alert-info">
+            <h5>Structure du fichier CSV attendue :</h5>
+            <p>Le fichier doit comporter 6 colonnes séparées par des virgules (sans en-tête) :</p>
+            <ul>
+                <li><strong>ID Avion</strong> (ex: 2)</li>
+                <li><strong>Pilote</strong> (ex: Dupont)</li>
+                <li><strong>ID Aéroport Départ</strong> (ex: 1)</li>
+                <li><strong>Date Départ</strong> (Format: YYYY-MM-DD HH:MM)</li>
+                <li><strong>ID Aéroport Arrivée</strong> (ex: 3)</li>
+                <li><strong>Date Arrivée</strong> (Format: YYYY-MM-DD HH:MM)</li>
+            </ul>
+            <p><em>Note : L'algorithme des 10 minutes d'espacement de piste sera automatiquement appliqué lors de l'import.</em></p>
+        </div>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="form-actions mt-4">
+                <button type="submit" class="btn btn-primary">Lancer l'importation</button>
+                <a href="{% url 'liste_vols' %}" class="btn btn-secondary">Retour aux vols</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

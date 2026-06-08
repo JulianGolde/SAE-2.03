@@ -41,3 +41,9 @@ class AeroportForm(forms.ModelForm):
     class Meta:
         model = Aeroport
         fields = ['nom', 'pays']
+
+class UploadFileForm(forms.Form):
+    fichier_csv = forms.FileField(
+        label="Sélectionnez votre fichier CSV",
+        help_text="Le fichier doit respecter la structure indiquée."
+    )

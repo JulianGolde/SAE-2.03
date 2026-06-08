@@ -1,10 +1,13 @@
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView
-from django.shortcuts import render
 from datetime import timedelta
 from .models import Aeroport, Piste, Compagnie, TypeAvion, Avion, Vol
 from .forms import AeroportForm, PisteForm, CompagnieForm, TypeAvionForm, AvionForm, VolForm
-
+import csv
+from django.contrib import messages
+from django.shortcuts import render, redirect
+from datetime import datetime
+from .forms import UploadFileForm
 
 # --- PAGE D'ACCUEIL ---
 class AccueilView(TemplateView):
@@ -206,3 +209,51 @@ class VolDeleteView(DeleteView):
     model = Vol
     template_name = 'gestion_trafic/vols/suppression.html'
     success_url = reverse_lazy('liste_vols')
+
+
+def importer_vols(request):
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            fichier = request.FILES['fichier_csv']
+            # Lecture du fichier ligne par ligne
+            lignes = fichier.read().decode('utf-8').splitlines()
+            lecteur = csv.reader(lignes, delimiter=',')
+
+            vols_ajoutes = 0
+            erreurs = 0
+
+            for row in lecteur:
+                try:
+                    # Extraction des données de la ligne CSV
+                    avion = Avion.objects.get(id=int(row[0]))
+                    pilote = row[1]
+                    aero_dep = Aeroport.objects.get(id=int(row[2]))
+                    date_dep = datetime.strptime(row[3].strip(), '%Y-%m-%d %H:%M')
+                    aero_arr = Aeroport.objects.get(id=int(row[4]))
+                    date_arr = datetime.strptime(row[5].strip(), '%Y-%m-%d %H:%M')
+
+                    # On utilise l'algorithme des pistes qu'on a créé précédemment !
+                    libre, horaire_final, erreur_physique = verifier_creneau_piste(aero_arr, avion, date_arr)
+
+                    if erreur_physique:
+                        erreurs += 1
+                        continue  # Piste trop courte, on passe au vol suivant
+
+                    # Sauvegarde du vol (avec l'horaire potentiellement corrigé par l'algo)
+                    Vol.objects.create(
+                        avion=avion, pilote=pilote, aeroport_depart=aero_dep,
+                        date_heure_depart=date_dep, aeroport_arrivee=aero_arr,
+                        date_heure_arrivee=horaire_final
+                    )
+                    vols_ajoutes += 1
+
+                except Exception as e:
+                    erreurs += 1  # Ligne mal formatée ou ID introuvable
+
+            messages.success(request, f"Import terminé : {vols_ajoutes} vols ajoutés, {erreurs} erreurs ignorées.")
+            return redirect('liste_vols')
+    else:
+        form = UploadFileForm()
+
+    return render(request, 'gestion_trafic/vols/import.html', {'form': form})

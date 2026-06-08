@@ -3,7 +3,10 @@
 {% block content %}
 <div class="page-header">
     <h2>Liste des Vols Programmés</h2>
-    <a href="{% url 'ajouter_vol' %}" class="btn btn-success">+ Programmer un Vol</a>
+    <div class="header-actions">
+        <a href="{% url 'importer_vols' %}" class="btn btn-secondary" style="margin-right: 10px;"> Importer via CSV</a>
+        <a href="{% url 'ajouter_vol' %}" class="btn btn-success">+ Programmer un Vol</a>
+    </div>
 </div>
 
 <div class="data-card">

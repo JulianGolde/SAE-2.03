@@ -40,4 +40,7 @@ urlpatterns = [
     path('vols/ajouter/', views.VolCreateView.as_view(), name='ajouter_vol'),
     path('vols/<int:pk>/modifier/', views.VolUpdateView.as_view(), name='modifier_vol'),
     path('vols/<int:pk>/supprimer/', views.VolDeleteView.as_view(), name='supprimer_vol'),
+
+    #Url d'import
+    path('vols/importer/', views.importer_vols, name='importer_vols'),
 ]

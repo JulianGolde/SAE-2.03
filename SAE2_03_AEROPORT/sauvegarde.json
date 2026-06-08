@@ -1,0 +1,30 @@
+[
+{
+    "model": "gestion_trafic.aeroport",
+    "pk": 1,
+    "fields": {
+        "nom": "Paris Charles de Gaulle",
+        "pays": "France"
+    }
+},
+{
+    "model": "gestion_trafic.compagnie",
+    "pk": 1,
+    "fields": {
+        "nom": "ah",
+        "description": "ah",
+        "pays_rattachement": "h"
+    }
+},
+{
+    "model": "gestion_trafic.typeavion",
+    "pk": 4,
+    "fields": {
+        "marque": "qsdfjoqsdfj,",
+        "modele": "dsqffqsdf",
+        "description": "qsdfqsfd",
+        "image": "images_avions/cisco-paquet-tracert-1269417210_IZ2H3uf.jpg",
+        "longueur_piste_necessaire": 2000
+    }
+}
+]
