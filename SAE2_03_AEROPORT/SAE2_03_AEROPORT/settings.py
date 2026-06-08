@@ -81,8 +81,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'sae_aeroport',
-        'USER': 'django_app',              # <-- Ton nouvel utilisateur !
-        'PASSWORD': 'Sae_aeroport2026!',   # <-- Ton mot de passe sécurisé
+        'USER': 'django_app',              # utilisateur
+        'PASSWORD': 'Sae_aeroport2026!',   # mot de passe sécurisé
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }
