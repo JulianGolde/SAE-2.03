@@ -79,12 +79,8 @@ WSGI_APPLICATION = 'SAE2_03_AEROPORT.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sae_aeroport',
-        'USER': 'django_app',              # utilisateur
-        'PASSWORD': 'Sae_aeroport2026!',   # mot de passe sécurisé
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
