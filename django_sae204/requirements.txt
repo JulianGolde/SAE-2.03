@@ -1,0 +1,20 @@
+# --- Dépendances du projet Django SAE 2.04 (RTGRP12) ---
+
+# Framework web
+Django>=5.0,<5.3
+
+# Connecteur MySQL (recommandé). Nécessite parfois les outils de build.
+# Alternative pure Python si l'installation échoue : voir README (PyMySQL).
+mysqlclient>=2.2
+
+# Génération des fichiers Excel (.xlsx) + graphiques
+openpyxl>=3.1
+
+# Lecture des variables d'environnement depuis un fichier .env
+python-dotenv>=1.0
+
+# Serveur d'application pour la mise en production
+gunicorn>=21.2
+
+# Service des fichiers statiques (CSS de l'admin) sans Apache
+whitenoise>=6.6

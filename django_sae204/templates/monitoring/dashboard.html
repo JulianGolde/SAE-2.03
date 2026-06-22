@@ -1,0 +1,231 @@
+{% extends "monitoring/base.html" %}
+{% block title %}Tableau de bord{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+    <h3 class="m-0">Tableau de bord des températures</h3>
+    <div class="d-flex align-items-center gap-3 flex-wrap">
+        <div class="form-check form-switch m-0">
+            <input class="form-check-input" type="checkbox" id="autoRefresh" checked>
+            <label class="form-check-label small" for="autoRefresh">Rafraîchissement auto</label>
+        </div>
+        <span id="maj" class="text-muted small"></span>
+        <a class="btn btn-success btn-sm"
+           href="{% url 'monitoring:export_excel' %}?capteur={{ capteur_id }}&debut={{ debut }}&fin={{ fin }}">
+            ⬇️ Export Excel
+        </a>
+    </div>
+</div>
+
+<!-- Bannière mode hors-ligne (base injoignable) -->
+<div id="banniere-hors-ligne" class="alert alert-warning {% if not payload.horsLigne %}d-none{% endif %}">
+    ⚠️ Base de données injoignable — affichage des <strong>dernières données connues</strong> (mode hors-ligne).
+</div>
+
+<!-- Filtres -->
+<form method="get" class="card p-3 mb-4">
+    <div class="row g-3 align-items-end">
+        <div class="col-md-4">
+            <label class="form-label">Capteur</label>
+            <select name="capteur" class="form-select">
+                <option value="">Tous les capteurs</option>
+                {% for c in capteurs %}
+                    <option value="{{ c.id }}" {% if c.id == capteur_id %}selected{% endif %}>
+                        {{ c.nom }} — {{ c.piece }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label class="form-label">Du</label>
+            <input type="date" name="debut" value="{{ debut }}" class="form-control">
+        </div>
+        <div class="col-md-3">
+            <label class="form-label">Au</label>
+            <input type="date" name="fin" value="{{ fin }}" class="form-control">
+        </div>
+        <div class="col-md-2 d-grid">
+            <button type="submit" class="btn btn-primary">Filtrer</button>
+        </div>
+    </div>
+</form>
+
+<!-- Statistiques -->
+<div class="row g-3 mb-4">
+    <div class="col-6 col-md-3">
+        <div class="card p-3"><div class="text-muted small">Mesures</div>
+            <div class="stat-value" id="stat-n">{{ payload.stats.n }}</div></div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="card p-3"><div class="text-muted small">Température moy.</div>
+            <div class="stat-value" id="stat-moy">{% if payload.stats.tmoy is not None %}{{ payload.stats.tmoy }} °C{% else %}—{% endif %}</div></div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="card p-3"><div class="text-muted small">Min / Max</div>
+            <div class="stat-value" id="stat-minmax">{% if payload.stats.tmin is not None %}{{ payload.stats.tmin }} / {{ payload.stats.tmax }}{% else %}—{% endif %}</div></div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="card p-3"><div class="text-muted small">Alertes critiques</div>
+            <div class="stat-value text-danger" id="stat-crit">{{ payload.nbCritiques }}</div></div>
+    </div>
+</div>
+
+<!-- Graphique -->
+<div class="card p-3 mb-4">
+    <h5>Évolution de la température (seuils : ≥ {{ seuil_haut }} °C / ≤ {{ seuil_bas }} °C)</h5>
+    <div style="height:420px;"><canvas id="chartTemp"></canvas></div>
+    <p id="noData" class="text-muted text-center my-5 d-none">
+        Aucune mesure sur la période sélectionnée.
+    </p>
+</div>
+
+<!-- Dernières mesures -->
+<h5 class="mb-3">Dernière mesure par capteur</h5>
+<div class="row g-3" id="cartes-dernieres">
+    {% for m in payload.dernieres %}
+        <div class="col-md-3 col-sm-6">
+            <div class="card p-3 h-100">
+                <div class="d-flex justify-content-between">
+                    <span class="fw-semibold">{{ m.piece }}</span>
+                    {% if m.etat == "HAUTE" %}<span class="badge bg-danger">Haute</span>
+                    {% elif m.etat == "BASSE" %}<span class="badge bg-primary">Basse</span>
+                    {% else %}<span class="badge bg-success">OK</span>{% endif %}
+                </div>
+                <div class="stat-value">{{ m.temp }} °C</div>
+                <div class="text-muted small">{{ m.nom }}</div>
+                <div class="text-muted small">{{ m.date }}</div>
+            </div>
+        </div>
+    {% empty %}
+        <p class="text-muted">Aucun capteur enregistré.</p>
+    {% endfor %}
+</div>
+
+{{ payload|json_script:"dash-data" }}
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+<script>
+(function () {
+    const API = "{% url 'monitoring:api_data' %}";
+    const OPTIONS = {
+        responsive: true, maintainAspectRatio: false,
+        animation: false,
+        interaction: {mode: 'nearest', intersect: false},
+        scales: {
+            x: {type: 'time', time: {tooltipFormat: 'dd/MM/yyyy HH:mm'},
+                title: {display: true, text: 'Date / heure'}},
+            y: {title: {display: true, text: 'Température (°C)'}}
+        },
+        plugins: {legend: {position: 'bottom'}}
+    };
+
+    let chart = null;
+
+    // Construit les séries + les deux lignes de seuil. Renvoie null si pas de point.
+    function datasetsAvecSeuils(d) {
+        const ds = (d.datasets || []).map(x => Object.assign({}, x));
+        let min = null, max = null;
+        ds.forEach(s => s.data.forEach(p => {
+            if (min === null || p.x < min) min = p.x;
+            if (max === null || p.x > max) max = p.x;
+        }));
+        if (min === null) return null;
+        const ligne = (v, c, l) => ({
+            label: l, data: [{x: min, y: v}, {x: max, y: v}],
+            borderColor: c, borderDash: [6, 6], borderWidth: 1.5,
+            pointRadius: 0, fill: false, tension: 0
+        });
+        ds.push(ligne(d.seuilHaut, '#dc2626', 'Seuil haut'));
+        ds.push(ligne(d.seuilBas, '#2563eb', 'Seuil bas'));
+        return ds;
+    }
+
+    function majChart(d) {
+        const canvas = document.getElementById('chartTemp');
+        const nodata = document.getElementById('noData');
+        const ds = datasetsAvecSeuils(d);
+        if (!ds) {
+            canvas.classList.add('d-none');
+            nodata.classList.remove('d-none');
+            return;
+        }
+        canvas.classList.remove('d-none');
+        nodata.classList.add('d-none');
+        if (!chart) {
+            chart = new Chart(canvas, {type: 'line', data: {datasets: ds}, options: OPTIONS});
+        } else {
+            chart.data.datasets = ds;
+            chart.update('none');
+        }
+    }
+
+    function majBanniere(d) {
+        const b = document.getElementById('banniere-hors-ligne');
+        if (d.horsLigne) b.classList.remove('d-none');
+        else b.classList.add('d-none');
+    }
+
+    function majStats(d) {
+        const s = d.stats || {};
+        document.getElementById('stat-n').textContent = s.n;
+        document.getElementById('stat-moy').textContent = (s.tmoy != null) ? s.tmoy + ' °C' : '—';
+        document.getElementById('stat-minmax').textContent =
+            (s.tmin != null) ? s.tmin + ' / ' + s.tmax : '—';
+        document.getElementById('stat-crit').textContent = d.nbCritiques;
+    }
+
+    function badge(etat) {
+        if (etat === 'HAUTE') return '<span class="badge bg-danger">Haute</span>';
+        if (etat === 'BASSE') return '<span class="badge bg-primary">Basse</span>';
+        return '<span class="badge bg-success">OK</span>';
+    }
+
+    function majCartes(liste) {
+        const c = document.getElementById('cartes-dernieres');
+        if (!liste || !liste.length) {
+            c.innerHTML = '<p class="text-muted">Aucun capteur enregistré.</p>';
+            return;
+        }
+        c.innerHTML = liste.map(m => `
+            <div class="col-md-3 col-sm-6">
+                <div class="card p-3 h-100">
+                    <div class="d-flex justify-content-between">
+                        <span class="fw-semibold">${m.piece}</span>${badge(m.etat)}
+                    </div>
+                    <div class="stat-value">${m.temp} °C</div>
+                    <div class="text-muted small">${m.nom}</div>
+                    <div class="text-muted small">${m.date}</div>
+                </div>
+            </div>`).join('');
+    }
+
+    async function rafraichir() {
+        try {
+            const resp = await fetch(API + window.location.search);
+            if (!resp.ok) return;
+            const d = await resp.json();
+            majChart(d); majStats(d); majCartes(d.dernieres); majBanniere(d);
+            document.getElementById('maj').textContent =
+                'Mis à jour à ' + new Date().toLocaleTimeString();
+        } catch (e) { /* silencieux : on réessaiera au prochain tick */ }
+    }
+
+    // Premier affichage à partir des données déjà rendues par le serveur
+    const initial = JSON.parse(document.getElementById('dash-data').textContent);
+    majChart(initial); majBanniere(initial);
+
+    // Rafraîchissement automatique toutes les 10 s (activable/désactivable)
+    let timer = null;
+    function setAuto(on) {
+        if (on) { rafraichir(); timer = setInterval(rafraichir, 10000); }
+        else if (timer) { clearInterval(timer); timer = null; }
+    }
+    const chk = document.getElementById('autoRefresh');
+    chk.addEventListener('change', () => setAuto(chk.checked));
+    setAuto(chk.checked);
+})();
+</script>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "monitoring/base.html" %}
+{% block title %}Import CSV{% endblock %}
+
+{% block content %}
+<h3 class="mb-3">Importer des mesures (CSV)</h3>
+
+<div class="row g-4">
+    <div class="col-lg-6">
+        <div class="card p-4">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label">{{ form.fichier.label }}</label>
+                    {{ form.fichier }}
+                    <div class="form-text">{{ form.fichier.help_text }}</div>
+                    {% for e in form.fichier.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
+                </div>
+                <div class="form-check mb-3">
+                    {{ form.creer_capteurs }}
+                    <label class="form-check-label">{{ form.creer_capteurs.label }}</label>
+                </div>
+                <button type="submit" class="btn btn-primary">Importer</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card p-4">
+            <h6>Format attendu</h6>
+            <p class="small text-muted mb-2">
+                Une ligne d'en-tête puis une ligne par mesure. Séparateur <code>,</code> ou <code>;</code>.
+                Dates au format <code>JJ/MM/AAAA HH:MM:SS</code> ou <code>AAAA-MM-JJ HH:MM:SS</code>.
+            </p>
+<pre class="bg-light p-3 rounded small mb-0">id_capteur;piece;date_mesure;temperature
+SAL01;Salon;16/06/2026 14:30:00;22,5
+SRV01;Salle Serveur;16/06/2026 14:30:00;27,8
+EXT01;Extérieur;16/06/2026 14:30:00;13,2</pre>
+            <p class="small text-muted mt-3 mb-0">
+                Colonnes obligatoires : <code>id_capteur</code>, <code>date_mesure</code>, <code>temperature</code>.
+                Optionnelles : <code>piece</code>, <code>nom</code>, <code>emplacement</code>.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

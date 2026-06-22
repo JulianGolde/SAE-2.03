@@ -1,0 +1,105 @@
+{% extends "monitoring/base.html" %}
+{% block title %}Logs critiques{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+    <h3 class="m-0">Logs des températures critiques</h3>
+    <a class="btn btn-success"
+       href="{% url 'monitoring:export_excel' %}?capteur={{ capteur_id }}&debut={{ debut }}&fin={{ fin }}">
+        ⬇️ Exporter en Excel
+    </a>
+</div>
+
+<p class="text-muted">
+    Seuils : température ≥ <strong>{{ seuil_haut }} °C</strong> (haute) ou ≤ <strong>{{ seuil_bas }} °C</strong> (basse).
+</p>
+
+{% if indisponible %}
+    <div class="alert alert-warning">⚠️ Base de données injoignable — impossible d'afficher les logs pour le moment.</div>
+{% endif %}
+
+<!-- Filtres -->
+<form method="get" class="card p-3 mb-4">
+    <div class="row g-3 align-items-end">
+        <div class="col-md-3">
+            <label class="form-label">Capteur</label>
+            <select name="capteur" class="form-select">
+                <option value="">Tous</option>
+                {% for c in capteurs %}
+                    <option value="{{ c.id }}" {% if c.id == capteur_id %}selected{% endif %}>{{ c.nom }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">Type</label>
+            <select name="type" class="form-select">
+                <option value="">Tous</option>
+                <option value="haute" {% if type_alerte == "haute" %}selected{% endif %}>Haute</option>
+                <option value="basse" {% if type_alerte == "basse" %}selected{% endif %}>Basse</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label class="form-label">Du</label>
+            <input type="date" name="debut" value="{{ debut }}" class="form-control">
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">Au</label>
+            <input type="date" name="fin" value="{{ fin }}" class="form-control">
+        </div>
+        <div class="col-md-2 d-grid">
+            <button type="submit" class="btn btn-primary">Filtrer</button>
+        </div>
+    </div>
+</form>
+
+<div class="card p-3">
+    <p class="text-muted small mb-2">{{ total }} alerte(s) trouvée(s).</p>
+    <div class="table-responsive">
+        <table class="table table-sm table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Date / heure</th><th>Capteur</th><th>Pièce</th>
+                    <th class="text-end">Température</th><th>État</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for m in page %}
+                    <tr>
+                        <td>{{ m.date_mesure|date:"d/m/Y H:i:s" }}</td>
+                        <td>{{ m.capteur.nom }}</td>
+                        <td>{{ m.capteur.piece }}</td>
+                        <td class="text-end fw-semibold">{{ m.temperature|floatformat:1 }} °C</td>
+                        <td>
+                            {% if m.etat == "HAUTE" %}<span class="badge bg-danger">Haute</span>
+                            {% else %}<span class="badge bg-primary">Basse</span>{% endif %}
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr><td colspan="5" class="text-center text-muted py-4">
+                        Aucune température critique sur cette période. 👍
+                    </td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% if page.paginator.num_pages > 1 %}
+        <nav class="mt-2">
+            <ul class="pagination pagination-sm justify-content-center mb-0">
+                {% if page.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?capteur={{ capteur_id }}&type={{ type_alerte }}&debut={{ debut }}&fin={{ fin }}&page={{ page.previous_page_number }}">«</a>
+                    </li>
+                {% endif %}
+                <li class="page-item disabled"><span class="page-link">
+                    Page {{ page.number }} / {{ page.paginator.num_pages }}</span></li>
+                {% if page.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?capteur={{ capteur_id }}&type={{ type_alerte }}&debut={{ debut }}&fin={{ fin }}&page={{ page.next_page_number }}">»</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
+</div>
+{% endblock %}
