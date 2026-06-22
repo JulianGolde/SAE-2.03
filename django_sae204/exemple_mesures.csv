@@ -1,8 +1,0 @@
-id_capteur;piece;date_mesure;temperature
-SAL01;Salon;16/06/2026 08:00:00;21,3
-SAL01;Salon;16/06/2026 12:00:00;23,1
-SRV01;Salle Serveur;16/06/2026 08:00:00;26,4
-SRV01;Salle Serveur;16/06/2026 12:00:00;31,7
-BUR01;Bureau Admin;16/06/2026 08:00:00;22,0
-EXT01;Extérieur;16/06/2026 03:00:00;2,5
-EXT01;Extérieur;16/06/2026 14:00:00;15,8
